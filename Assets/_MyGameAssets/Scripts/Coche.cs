@@ -6,6 +6,9 @@ public class Coche : MonoBehaviour {
 
     public float fuerzaMaxMotor = 100;
     public float anguloMaxRotacion = 20;
+    public float incrementoFrenado = 10;
+    // public float fuerzaMaxFreando = 10;
+    private float fuerzaFrenado = 0;
     private float vPos;
     private float hPos;
     // Tenemos que acceder al wheelcollider de cada rueda
@@ -24,11 +27,32 @@ public class Coche : MonoBehaviour {
         vPos = Input.GetAxis("Vertical");
         hPos = Input.GetAxis("Horizontal");
        
-        // RUEDAS MOTRICES
-        wcBackL.motorTorque = fuerzaMaxMotor * vPos;
-        wcBackR.motorTorque = fuerzaMaxMotor * vPos;
+        if (vPos > 0) {
+            // RUEDAS MOTRICES
+            SoltarFreno();
+            wcBackL.motorTorque = fuerzaMaxMotor * vPos;
+            wcBackR.motorTorque = fuerzaMaxMotor * vPos;
+        } else if (vPos < 0){
+            Frenar();
+        } 
+             
         // RUEDAS DIRECTRICES
         wcFrontL.steerAngle = anguloMaxRotacion * hPos;
         wcFrontR.steerAngle = anguloMaxRotacion * hPos;
+    }
+
+    private void Frenar() {
+        fuerzaFrenado = fuerzaFrenado + incrementoFrenado;
+        wcFrontL.brakeTorque = fuerzaFrenado;
+        wcFrontR.brakeTorque = fuerzaFrenado;
+        wcBackL.brakeTorque = fuerzaFrenado;
+        wcBackR.brakeTorque = fuerzaFrenado;
+    }
+
+    private void SoltarFreno() {
+        wcFrontL.brakeTorque = 0;
+        wcFrontR.brakeTorque = 0;
+        wcBackL.brakeTorque = 0;
+        wcBackR.brakeTorque = 0;
     }
 }
