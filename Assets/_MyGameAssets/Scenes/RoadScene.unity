@@ -781,9 +781,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f26cfaeec9a19b428b54ade30bd6a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerzaMaxMotor: 1000
-  anguloMaxRotacion: 10
-  incrementoFrenado: 5
+  fuerzaMaxMotor: 500
+  anguloMaxRotacion: 20
+  incrementoFrenado: 20
 --- !u!1 &1953635837
 GameObject:
   m_ObjectHideFlags: 0
