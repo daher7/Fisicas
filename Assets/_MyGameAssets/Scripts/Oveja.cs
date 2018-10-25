@@ -9,5 +9,5 @@ public class Oveja : MonoBehaviour {
         print("VIVA EL TRIGGER: " + gameObject.name);
 
     }
-
+    
 }
