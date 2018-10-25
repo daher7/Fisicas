@@ -8,9 +8,9 @@ public class Coche : MonoBehaviour {
     public Text txtFrenoDeMano;
     public Text txtSpeed;
     public Text txtMarcha;
-    public float fuerzaMaxMotor = 100;
-    public float anguloMaxRotacion = 20;
-    public float incrementoFrenado = 10;
+    public float fuerzaMaxMotor = 100f;
+    public float anguloMaxRotacion = 20f;
+    public float incrementoFrenado = 10f;
     // public float fuerzaMaxFreando = 10;
     private float fuerzaFrenado = 0;
     private float vPos;
@@ -55,29 +55,28 @@ public class Coche : MonoBehaviour {
         wcFrontL.steerAngle = anguloMaxRotacion * hPos;
         wcFrontR.steerAngle = anguloMaxRotacion * hPos;
 
-        if(!frenoManoActivo){
+        if (!frenoManoActivo) {
             if (vPos > 0) {
                 txtMarcha.text = "1";
                 // RUEDAS MOTRICES
                 SoltarFreno();
                 wcBackL.motorTorque = fuerzaMaxMotor * vPos;
                 wcBackR.motorTorque = fuerzaMaxMotor * vPos;
-            } else if (vPos < 0 && fSpeed > 0.01){
+            } else if (vPos < 0 && fSpeed > 0.01) {
                 txtMarcha.text = "0";
                 Frenar();
-            } else if (vPos < 0 && fSpeed <= 0.01){
+            } else if (vPos < 0 && fSpeed <= 0.01) {
                 txtMarcha.text = "R";
                 SoltarFreno();
                 wcBackL.motorTorque = fuerzaMaxMotor * vPos;
-                wcBackR.motorTorque = fuerzaMaxMotor * vPos;        
-            }
-
+                wcBackR.motorTorque = fuerzaMaxMotor * vPos;
+            } 
         } else {
             wcFrontL.brakeTorque = Mathf.Infinity;
             wcFrontR.brakeTorque = Mathf.Infinity;
             wcBackL.brakeTorque = Mathf.Infinity;
             wcBackR.brakeTorque = Mathf.Infinity;
-        }         
+        }       
     }
 
     private void Frenar() {
