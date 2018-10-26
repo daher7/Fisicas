@@ -10,30 +10,29 @@ public class Coche : MonoBehaviour {
     public Text txtMarcha;
     public float fuerzaMaxMotor = 100f;
     public float anguloMaxRotacion = 20f;
-    public float incrementoFrenado = 10f;
-    // public float fuerzaMaxFreando = 10;
-    private float fuerzaFrenado = 0;
-    private float vPos;
-    private float hPos;
-    bool frenoManoActivo = true;
-    // Tenemos que acceder al wheelcollider de cada rueda
+    public int incrementoFrenado = 5;
+    float fuerzaFrenado = 0;
+    float vPos;
+    float hPos;
+    bool frenoManoActivo = false;
     private WheelCollider wcFrontL, wcFrontR, wcBackL, wcBackR;
-    float fSpeed; 
+    float fSpeed;
+    // PARA LAS LUCES
+    public Material materialFreno;
+
 
     private void Start() {
         wcFrontL = GameObject.Find("FrontL").GetComponent<WheelCollider>();
         wcFrontR = GameObject.Find("FrontR").GetComponent<WheelCollider>();
         wcBackL = GameObject.Find("BackL").GetComponent<WheelCollider>();
         wcBackR = GameObject.Find("BackR").GetComponent<WheelCollider>();
-
-        // PILOTOS ENCENDIDOS
         
     }
     
     void Update()
     {
         // VELOCIDAD
-        fSpeed = GetComponent<Rigidbody>().velocity.z;
+        fSpeed = GetComponent<Rigidbody>().velocity.magnitude;
         txtSpeed.text = ((int)fSpeed).ToString();
         
         if(Input.GetKeyDown(KeyCode.F)){
@@ -57,13 +56,18 @@ public class Coche : MonoBehaviour {
 
         if (!frenoManoActivo) {
             if (vPos > 0) {
+                // DESACTIVA LA LUZ DE FRENOS
+                materialFreno.DisableKeyword("_EMISSION");
+                // PINTA EN LA UI LA MARCHA
                 txtMarcha.text = "1";
+                
                 // RUEDAS MOTRICES
                 SoltarFreno();
                 wcBackL.motorTorque = fuerzaMaxMotor * vPos;
                 wcBackR.motorTorque = fuerzaMaxMotor * vPos;
             } else if (vPos < 0 && fSpeed > 0.01) {
                 txtMarcha.text = "0";
+                materialFreno.EnableKeyword("_EMISSION");
                 Frenar();
             } else if (vPos < 0 && fSpeed <= 0.01) {
                 txtMarcha.text = "R";

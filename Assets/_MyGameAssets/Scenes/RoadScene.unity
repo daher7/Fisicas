@@ -1195,9 +1195,10 @@ MonoBehaviour:
   txtFrenoDeMano: {fileID: 1781881531}
   txtSpeed: {fileID: 210254450}
   txtMarcha: {fileID: 596973001}
-  fuerzaMaxMotor: 500
+  fuerzaMaxMotor: 450
   anguloMaxRotacion: 20
   incrementoFrenado: 20
+  materialFreno: {fileID: 2100000, guid: 997bb0297c3981e4d976548708cf2e68, type: 2}
 --- !u!1 &1640719212
 GameObject:
   m_ObjectHideFlags: 0

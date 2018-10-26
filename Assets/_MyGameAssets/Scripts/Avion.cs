@@ -8,7 +8,6 @@ public class Avion : MonoBehaviour {
 
     // Update is called once per frame
 
-
 	void Update () {
         float vPos = Input.GetAxis("Vertical");
         float hPos = Input.GetAxis("Horizontal");
@@ -17,11 +16,8 @@ public class Avion : MonoBehaviour {
         GetComponent<CharacterController>().Move(
             transform.forward * Time.deltaTime * speed);
 
-        // ROTAMOS EL AVION HACIA ARRIBA Y HACIA ABAJO
-        transform.Rotate(new Vector3(1 * vPos, 0, 0));
-
         // GIRAMOS EL AVION
-        transform.Rotate(new Vector3(vPos, hPos*-1, hPos*-1));
+        transform.Rotate(new Vector3(vPos, hPos, hPos * -1));
 
         /*
          * PARA UN OBJETO TERRESTRE
